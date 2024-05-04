@@ -9,6 +9,7 @@ public class Game {
   public String playerName;
   public Strategy strategy;
   public Choice choice;
+  public String choiceString;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     gameNumber = 0;
@@ -16,6 +17,14 @@ public class Game {
     playerName = options[0];
     setDifficulty(difficulty);
     setChoice(choice);
+    switch (choice) {
+      case ODD:
+          choiceString = "ODD";
+          break;
+      case EVEN:
+          choiceString = "EVEN";
+          break;
+  }
   }
 
   public void play() {
@@ -35,6 +44,13 @@ public class Game {
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(finger));
 
     sum = Integer.parseInt(input) + finger;
+
+    if(wins(sum)){
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), choiceString, playerName);
+    }
+    else{
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), choiceString, "HAL-9000");
+    }
   }
 
   public void endGame() {}
@@ -57,5 +73,14 @@ public class Game {
 
   public void setChoice(Choice choice) {
     this.choice = choice;
+  }
+
+  public boolean wins(int sum) {
+    if (((choice == Choice.ODD) && Utils.isOdd(sum))
+        || ((choice == Choice.EVEN) && Utils.isEven(sum))) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
