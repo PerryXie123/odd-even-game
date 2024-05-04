@@ -10,6 +10,7 @@ public class Game {
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     gameNumber++;
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
+    MessageCli.ASK_INPUT.printMessage();
   }
 
   public void play() {
