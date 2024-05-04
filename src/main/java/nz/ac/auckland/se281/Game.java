@@ -18,6 +18,11 @@ public class Game {
     MessageCli.START_ROUND.printMessage(Integer.toString(gameNumber));
     MessageCli.ASK_INPUT.printMessage();
     String input = Utils.scanner.nextLine();
+    while (!Utils.isInteger(input)
+        || (Integer.parseInt(input) < 0 || Integer.parseInt(input) > 5)) {
+      MessageCli.INVALID_INPUT.printMessage();
+      input = Utils.scanner.nextLine();
+    }
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
   }
 
