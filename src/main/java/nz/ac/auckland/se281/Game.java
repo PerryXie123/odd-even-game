@@ -7,13 +7,20 @@ import nz.ac.auckland.se281.Main.Difficulty;
 public class Game {
   public int gameNumber = 0;
   public String playerName;
+  public Strategy strategy;
+  public Choice choice;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
+    gameNumber = 0;
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     playerName = options[0];
+    setDifficulty(difficulty);
+    setChoice(choice);
   }
 
   public void play() {
+    int finger;
+    int sum;
     gameNumber++;
     MessageCli.START_ROUND.printMessage(Integer.toString(gameNumber));
     MessageCli.ASK_INPUT.printMessage();
@@ -24,9 +31,31 @@ public class Game {
       input = Utils.scanner.nextLine();
     }
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
+    finger = strategy.chooseFinger();
+    MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(finger));
+
+    sum = Integer.parseInt(input) + finger;
   }
 
   public void endGame() {}
 
   public void showStats() {}
+
+  public void setDifficulty(Difficulty difficulty) {
+    switch (difficulty) {
+      case EASY:
+        strategy = new Easy();
+        break;
+      case MEDIUM:
+        strategy = new Medium();
+        break;
+      case HARD:
+        strategy = new Hard();
+        break;
+    }
+  }
+
+  public void setChoice(Choice choice) {
+    this.choice = choice;
+  }
 }
