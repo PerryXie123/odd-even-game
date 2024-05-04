@@ -19,12 +19,12 @@ public class Game {
     setChoice(choice);
     switch (choice) {
       case ODD:
-          choiceString = "ODD";
-          break;
+        choiceString = "ODD";
+        break;
       case EVEN:
-          choiceString = "EVEN";
-          break;
-  }
+        choiceString = "EVEN";
+        break;
+    }
   }
 
   public void play() {
@@ -45,11 +45,18 @@ public class Game {
 
     sum = Integer.parseInt(input) + finger;
 
-    if(wins(sum)){
-      MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), choiceString, playerName);
+    String EVENODD;
+
+    if (Utils.isEven(sum)) {
+      EVENODD = "EVEN";
+    } else {
+      EVENODD = "ODD";
     }
-    else{
-      MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), choiceString, "HAL-9000");
+
+    if (wins(sum)) {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), EVENODD, playerName);
+    } else {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), EVENODD, "HAL-9000");
     }
   }
 
