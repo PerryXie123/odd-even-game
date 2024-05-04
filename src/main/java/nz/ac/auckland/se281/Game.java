@@ -9,12 +9,12 @@ public class Game {
   public String playerName;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
-    gameNumber++;
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     playerName = options[0];
   }
 
   public void play() {
+    gameNumber++;
     MessageCli.START_ROUND.printMessage(Integer.toString(gameNumber));
     MessageCli.ASK_INPUT.printMessage();
     String input = Utils.scanner.nextLine();
