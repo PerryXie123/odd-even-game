@@ -9,9 +9,9 @@ public class Game {
   public String playerName;
   public Strategy strategy;
   public Choice choice;
-  public static String choiceString;
-  public static int oddCount;
-  public static int evenCount;
+  public String choiceString;
+  public int oddCount;
+  public int evenCount;
   public Hard hardStrategy;
   public int win;
 
@@ -53,7 +53,7 @@ public class Game {
       oddCount++;
     }
 
-    finger = strategy.chooseFinger(gameNumber);
+    finger = strategy.chooseFinger(gameNumber, oddCount, evenCount, choiceString);
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(finger));
 
     sum = Integer.parseInt(input) + finger;
@@ -74,9 +74,7 @@ public class Game {
       win = 0;
     }
 
-    if(strategy instanceof Hard){
-      
-    }
+    if (strategy instanceof Hard) {}
   }
 
   public void endGame() {}

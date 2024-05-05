@@ -6,7 +6,7 @@ public class Hard implements Strategy {
   private int lastWinStrategy = 0;
 
   @Override
-  public int chooseFinger(int round) {
+  public int chooseFinger(int round, int oddCount, int evenCount, String choiceString) {
     if (roundCount > 3) {
       if (lastWinStrategy == 0) {
         currentStrategy = new Top();
@@ -16,7 +16,7 @@ public class Hard implements Strategy {
         lastWinStrategy = 0;
       }
     }
-    return currentStrategy.chooseFinger(round);
+    return currentStrategy.chooseFinger(round, oddCount, evenCount, choiceString);
   }
 
   public void setLastWinStrategy(int winner) {
