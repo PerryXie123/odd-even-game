@@ -89,12 +89,14 @@ public class Game {
 
   public void endGame() {
     showStats();
-    if(userWins > botWins){
+    if (userWins > botWins) {
       MessageCli.PRINT_END_GAME.printMessage(playerName);
-    }
-    else if(botWins > userWins){
+    } else if (botWins > userWins) {
       MessageCli.PRINT_END_GAME.printMessage("HAL-9000");
+    } else {
+      MessageCli.PRINT_END_GAME_TIE.printMessage();
     }
+    active = false;
   }
 
   public void showStats() {
