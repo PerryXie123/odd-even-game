@@ -14,8 +14,10 @@ public class Game {
   public int evenCount;
   public Hard hardStrategy;
   public int win;
+  public boolean active = false;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
+    active = true;
     gameNumber = 0;
     oddCount = 0;
     evenCount = 0;
@@ -36,45 +38,47 @@ public class Game {
   public void play() {
     int finger;
     int sum;
-    gameNumber++;
-    MessageCli.START_ROUND.printMessage(Integer.toString(gameNumber));
-    MessageCli.ASK_INPUT.printMessage();
-    String input = Utils.scanner.nextLine();
-    while (!Utils.isInteger(input)
-        || (Integer.parseInt(input) < 0 || Integer.parseInt(input) > 5)) {
-      MessageCli.INVALID_INPUT.printMessage();
-      input = Utils.scanner.nextLine();
-    }
-    MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
-
-    if (Utils.isEven(Integer.parseInt(input))) {
-      evenCount++;
+    if (active == false) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
     } else {
-      oddCount++;
+      gameNumber++;
+      MessageCli.START_ROUND.printMessage(Integer.toString(gameNumber));
+      MessageCli.ASK_INPUT.printMessage();
+      String input = Utils.scanner.nextLine();
+      while (!Utils.isInteger(input)
+          || (Integer.parseInt(input) < 0 || Integer.parseInt(input) > 5)) {
+        MessageCli.INVALID_INPUT.printMessage();
+        input = Utils.scanner.nextLine();
+      }
+      MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
+
+      if (Utils.isEven(Integer.parseInt(input))) {
+        evenCount++;
+      } else {
+        oddCount++;
+      }
+
+      finger = strategy.chooseFinger(gameNumber, oddCount, evenCount, choiceString);
+      MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(finger));
+
+      sum = Integer.parseInt(input) + finger;
+
+      String EVENODD;
+
+      if (Utils.isEven(sum)) {
+        EVENODD = "EVEN";
+      } else {
+        EVENODD = "ODD";
+      }
+
+      if (wins(sum)) {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), EVENODD, playerName);
+        win = 1;
+      } else {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), EVENODD, "HAL-9000");
+        win = 0;
+      }
     }
-
-    finger = strategy.chooseFinger(gameNumber, oddCount, evenCount, choiceString);
-    MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(finger));
-
-    sum = Integer.parseInt(input) + finger;
-
-    String EVENODD;
-
-    if (Utils.isEven(sum)) {
-      EVENODD = "EVEN";
-    } else {
-      EVENODD = "ODD";
-    }
-
-    if (wins(sum)) {
-      MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), EVENODD, playerName);
-      win = 1;
-    } else {
-      MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), EVENODD, "HAL-9000");
-      win = 0;
-    }
-
-    if (strategy instanceof Hard) {}
   }
 
   public void endGame() {}
