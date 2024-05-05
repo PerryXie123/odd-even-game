@@ -87,7 +87,15 @@ public class Game {
     }
   }
 
-  public void endGame() {}
+  public void endGame() {
+    showStats();
+    if(userWins > botWins){
+      MessageCli.PRINT_END_GAME.printMessage(playerName);
+    }
+    else if(botWins > userWins){
+      MessageCli.PRINT_END_GAME.printMessage("HAL-9000");
+    }
+  }
 
   public void showStats() {
     if (active == false) {
@@ -96,7 +104,7 @@ public class Game {
       MessageCli.PRINT_PLAYER_WINS.printMessage(
           playerName, Integer.toString(userWins), Integer.toString(botWins));
       MessageCli.PRINT_PLAYER_WINS.printMessage(
-          playerName, Integer.toString(botWins), Integer.toString(userWins));
+          "HAL-9000", Integer.toString(botWins), Integer.toString(userWins));
     }
   }
 
