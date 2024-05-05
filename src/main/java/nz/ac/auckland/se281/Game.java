@@ -15,12 +15,16 @@ public class Game {
   public Hard hardStrategy;
   public int win;
   public boolean active = false;
+  public int userWins;
+  public int botWins;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     active = true;
     gameNumber = 0;
     oddCount = 0;
     evenCount = 0;
+    userWins = 0;
+    botWins = 0;
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     playerName = options[0];
     setDifficulty(difficulty);
@@ -73,9 +77,11 @@ public class Game {
 
       if (wins(sum)) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), EVENODD, playerName);
+        userWins++;
         win = 1;
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), EVENODD, "HAL-9000");
+        botWins++;
         win = 0;
       }
     }
@@ -83,7 +89,16 @@ public class Game {
 
   public void endGame() {}
 
-  public void showStats() {}
+  public void showStats() {
+    if (active == false) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+    } else {
+      MessageCli.PRINT_PLAYER_WINS.printMessage(
+          playerName, Integer.toString(userWins), Integer.toString(botWins));
+      MessageCli.PRINT_PLAYER_WINS.printMessage(
+          playerName, Integer.toString(botWins), Integer.toString(userWins));
+    }
+  }
 
   public void setDifficulty(Main.Difficulty difficulty) {
     StrategyFactory factory = new StrategyFactory();
