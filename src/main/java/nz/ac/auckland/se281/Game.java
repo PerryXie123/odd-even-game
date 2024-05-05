@@ -9,10 +9,16 @@ public class Game {
   public String playerName;
   public Strategy strategy;
   public Choice choice;
-  public String choiceString;
+  public static String choiceString;
+  public static int oddCount;
+  public static int evenCount;
+  public Hard hardStrategy;
+  public int win;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     gameNumber = 0;
+    oddCount = 0;
+    evenCount = 0;
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     playerName = options[0];
     setDifficulty(difficulty);
@@ -40,7 +46,14 @@ public class Game {
       input = Utils.scanner.nextLine();
     }
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
-    finger = strategy.chooseFinger();
+
+    if (Utils.isEven(Integer.parseInt(input))) {
+      evenCount++;
+    } else {
+      oddCount++;
+    }
+
+    finger = strategy.chooseFinger(gameNumber);
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(finger));
 
     sum = Integer.parseInt(input) + finger;
@@ -55,8 +68,14 @@ public class Game {
 
     if (wins(sum)) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), EVENODD, playerName);
+      win = 1;
     } else {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), EVENODD, "HAL-9000");
+      win = 0;
+    }
+
+    if(strategy instanceof Hard){
+      
     }
   }
 
@@ -64,17 +83,11 @@ public class Game {
 
   public void showStats() {}
 
-  public void setDifficulty(Difficulty difficulty) {
-    switch (difficulty) {
-      case EASY:
-        strategy = new Easy();
-        break;
-      case MEDIUM:
-        strategy = new Medium();
-        break;
-      case HARD:
-        strategy = new Hard();
-        break;
+  public void setDifficulty(Main.Difficulty difficulty) {
+    StrategyFactory factory = new StrategyFactory();
+    this.strategy = factory.getStrategy(difficulty);
+    if (difficulty == Main.Difficulty.HARD) {
+      hardStrategy = (Hard) strategy;
     }
   }
 
