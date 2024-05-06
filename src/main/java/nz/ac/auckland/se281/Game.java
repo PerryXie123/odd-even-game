@@ -5,18 +5,18 @@ import nz.ac.auckland.se281.Main.Difficulty;
 
 /** This class represents the Game is the main entry point. */
 public class Game {
-  public int gameNumber = 0;
-  public String playerName;
-  public Strategy strategy;
-  public Choice choice;
-  public String choiceString;
-  public int oddCount;
-  public int evenCount;
-  public Hard hardStrategy;
-  public int win;
-  public boolean active = false;
-  public int userWins;
-  public int botWins;
+  private int gameNumber = 0;
+  private String playerName;
+  private Strategy strategy;
+  private Choice choice;
+  private String choiceString;
+  private int oddCount;
+  private int evenCount;
+  private Hard hardStrategy = new Hard();
+  private int win = 0;
+  private boolean active = false;
+  private int userWins;
+  private int botWins;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     active = true;
