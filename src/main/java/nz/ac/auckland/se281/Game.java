@@ -12,8 +12,6 @@ public class Game {
   private String choiceString;
   private int oddCount;
   private int evenCount;
-  private Hard hardStrategy = new Hard();
-  private int win = 0;
   private boolean active = false;
   private int userWins;
   private int botWins;
@@ -78,11 +76,9 @@ public class Game {
       if (wins(sum)) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), EVENODD, playerName);
         userWins++;
-        win = 1;
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), EVENODD, "HAL-9000");
         botWins++;
-        win = 0;
       }
     }
   }
@@ -113,9 +109,6 @@ public class Game {
   public void setDifficulty(Main.Difficulty difficulty) {
     StrategyFactory factory = new StrategyFactory();
     this.strategy = factory.getStrategy(difficulty);
-    if (difficulty == Main.Difficulty.HARD) {
-      hardStrategy = (Hard) strategy;
-    }
   }
 
   public void setChoice(Choice choice) {
