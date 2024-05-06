@@ -16,6 +16,13 @@ public class Game {
   private int userWins;
   private int botWins;
 
+  /**
+   * Initialises a new game with a default round number and win values.
+   *
+   * @param difficulty the difficulty chosen by the user
+   * @param choice the choice of the user between odd and even
+   * @param options an array with information about the user
+   */
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     active = true;
     gameNumber = 0;
@@ -37,6 +44,7 @@ public class Game {
     }
   }
 
+  /** Includes the logic for the game, and how the user inputs interact with the bots difficulty. */
   public void play() {
     int finger;
     int sum;
@@ -83,6 +91,7 @@ public class Game {
     }
   }
 
+  /** Ends the instance of the game, and prints out corresponding messages. */
   public void endGame() {
     showStats();
     if (userWins > botWins) {
@@ -95,6 +104,7 @@ public class Game {
     active = false;
   }
 
+  /** Shows the current statistics for the user and the bot. */
   public void showStats() {
     if (active == false) {
       MessageCli.GAME_NOT_STARTED.printMessage();
@@ -106,15 +116,32 @@ public class Game {
     }
   }
 
+  /**
+   * Invokes a strategy factory to build the corresponding bot.
+   *
+   * @param difficulty the difficulty as specified by the user
+   */
   public void setDifficulty(Main.Difficulty difficulty) {
     StrategyFactory factory = new StrategyFactory();
     this.strategy = factory.getStrategy(difficulty);
   }
 
+  /**
+   * Setter method for the users choice.
+   *
+   * @param choice the users choice between odd or even
+   */
   public void setChoice(Choice choice) {
     this.choice = choice;
   }
 
+  /**
+   * Checks whether the user or bot wins depending on the sum of the provided numbers and the users
+   * choice.
+   *
+   * @param sum the sum of the numbers provided by the user and the bot
+   * @return boolean true if the user wins, and false if the bot wins
+   */
   public boolean wins(int sum) {
     if (((choice == Choice.ODD) && Utils.isOdd(sum))
         || ((choice == Choice.EVEN) && Utils.isEven(sum))) {
