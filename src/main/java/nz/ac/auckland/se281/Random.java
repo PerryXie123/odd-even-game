@@ -14,6 +14,7 @@ public class Random implements Strategy {
    */
   @Override
   public int chooseFinger(int round, int oddCount, int evenCount, String choiceString) {
+    // Returns a random number
     return Utils.getRandomNumberRange(0, 5);
   }
 }

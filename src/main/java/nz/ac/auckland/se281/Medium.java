@@ -17,8 +17,10 @@ public class Medium implements Strategy {
    */
   @Override
   public int chooseFinger(int round, int oddCount, int evenCount, String choiceString) {
+    //Switches to top strategy when round number is above 3
     if (round > 3) {
       currentStrategy = new Top();
+    //Keeps the random strategy if round 3 and below
     } else {
       currentStrategy = new Random();
     }

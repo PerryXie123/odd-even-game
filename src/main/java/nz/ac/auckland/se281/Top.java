@@ -17,14 +17,17 @@ public class Top implements Strategy {
    */
   @Override
   public int chooseFinger(int round, int oddCount, int evenCount, String choiceString) {
+    //Checks if the odd and even inputs are the same
     if (oddCount == evenCount) {
       return Utils.getRandomNumberRange(0, 5);
+    //Checks if odd is more than even
     } else if (oddCount > evenCount) {
       if (choiceString.equals("ODD")) {
         return Utils.getRandomOddNumber();
       } else {
         return Utils.getRandomEvenNumber();
       }
+    //If even is more that odd
     } else {
       if (choiceString.equals("ODD")) {
         return Utils.getRandomEvenNumber();

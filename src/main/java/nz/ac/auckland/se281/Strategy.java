@@ -1,5 +1,7 @@
 package nz.ac.auckland.se281;
-
+/**
+ * This interface sets the needed methods for all implemented classes.
+ */
 public interface Strategy {
   /**
    * Bot chooses a finger to output depending on the user choices.

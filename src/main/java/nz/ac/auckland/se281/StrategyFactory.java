@@ -5,7 +5,14 @@ package nz.ac.auckland.se281;
  * inputs.
  */
 public class StrategyFactory {
+  /**
+   * This method builds a strategy based on the users chosen difficulty.
+   *
+   * @param difficulty the chosen difficulty
+   * @return the strategy which should be initialised
+   */
   public Strategy getStrategy(Main.Difficulty difficulty) {
+    // Switch case for all different types of difficulties
     switch (difficulty) {
       case EASY:
         return new Random();
