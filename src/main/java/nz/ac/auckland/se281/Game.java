@@ -85,21 +85,21 @@ public class Game {
       // Calculates the sum of the user and bot fingers
       sum = Integer.parseInt(input) + finger;
 
-      String EVENODD;
+      String evenOrOdd;
 
       // Gets the string version of the round outcomes
       if (Utils.isEven(sum)) {
-        EVENODD = "EVEN";
+        evenOrOdd = "EVEN";
       } else {
-        EVENODD = "ODD";
+        evenOrOdd = "ODD";
       }
 
       // Prints winner messages
       if (wins(sum)) {
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), EVENODD, playerName);
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), evenOrOdd, playerName);
         userWins++;
       } else {
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), EVENODD, "HAL-9000");
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), evenOrOdd, "HAL-9000");
         botWins++;
       }
     }
@@ -164,7 +164,7 @@ public class Game {
    * @return boolean true if the user wins, and false if the bot wins
    */
   public boolean wins(int sum) {
-    //Checks if the user wins the round
+    // Checks if the user wins the round
     if (((choice == Choice.ODD) && Utils.isOdd(sum))
         || ((choice == Choice.EVEN) && Utils.isEven(sum))) {
       return true;
