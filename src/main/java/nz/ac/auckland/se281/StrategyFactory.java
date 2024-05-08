@@ -4,7 +4,7 @@ package nz.ac.auckland.se281;
  * This class contains logic to create new Easy, Medium, and Hard difficulties based on the user
  * inputs.
  */
-public class StrategyFactory {
+public class StrategyFactory implements Factory{
   /**
    * This method builds a strategy based on the users chosen difficulty.
    *
