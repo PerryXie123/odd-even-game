@@ -1,5 +1,8 @@
 package nz.ac.auckland.se281;
 
+/**
+ * This class contains logic for the Medium difficulty.
+ */
 public class Medium implements Strategy {
   private Strategy currentStrategy = new Random();
 

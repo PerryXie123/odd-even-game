@@ -1,5 +1,9 @@
 package nz.ac.auckland.se281;
 
+/**
+ * This class contains logic to create new Easy, Medium, and Hard difficulties based on the user
+ * inputs.
+ */
 public class StrategyFactory {
   public Strategy getStrategy(Main.Difficulty difficulty) {
     switch (difficulty) {

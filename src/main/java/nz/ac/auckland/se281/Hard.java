@@ -1,5 +1,8 @@
 package nz.ac.auckland.se281;
 
+/**
+ * This class contains logic for the Hard difficulty.
+ */
 public class Hard implements Strategy {
   private Strategy currentStrategy = new Random();
   private int lastWinStrategy = 0;

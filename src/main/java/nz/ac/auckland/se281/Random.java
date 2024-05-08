@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+/** This class contains logic for choosing a random number between 0 and 5. */
 public class Random implements Strategy {
 
   /**
