@@ -36,7 +36,7 @@ public class Game {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     // Sets the player name, difficulty, and choice
     playerName = options[0];
-    setDifficulty(difficulty);
+    setStrategy(difficulty);
     setChoice(choice);
     // Sets the string version of the users choice
     switch (choice) {
@@ -140,7 +140,7 @@ public class Game {
    *
    * @param difficulty the difficulty as specified by the user
    */
-  public void setDifficulty(Main.Difficulty difficulty) {
+  public void setStrategy(Main.Difficulty difficulty) {
     // Sets the difficulty and invokes the strategy factory
     StrategyFactory factory = new StrategyFactory();
     this.strategy = factory.getStrategy(difficulty);
